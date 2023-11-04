@@ -6,7 +6,7 @@ word using all the letters in the displayed scrambled word.
 This code demonstrates the Android Architecture component- ViewModel and StateFlow.
 
 
-Pre-requisites
+Pre-1
 --------------
 * Experience with Kotlin syntax.
 * How to create and run a project in Android Studio.
