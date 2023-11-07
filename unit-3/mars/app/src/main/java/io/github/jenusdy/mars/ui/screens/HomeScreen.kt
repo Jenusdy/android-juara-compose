@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,16 +38,14 @@ import io.github.jenusdy.mars.ui.theme.MarsTheme
 
 @Composable
 fun HomeScreen(
-    marsUiState: MarsUiState, modifier: Modifier = Modifier
+    marsUiState: MarsUiState,
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     when (marsUiState) {
-        is MarsUiState.Loading -> LoadingScreen(modifier = Modifier.fillMaxSize())
-        is MarsUiState.Success -> ResultScreen(
-            photos = marsUiState.photos,
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        is MarsUiState.Error -> ErrorScreen(modifier = Modifier.fillMaxSize())
+        is MarsUiState.Loading -> LoadingScreen(modifier)
+        is MarsUiState.Success -> ResultScreen(marsUiState.photos, modifier)
+        is MarsUiState.Error -> ErrorScreen(retryAction, modifier)
     }
 }
 
@@ -60,16 +59,16 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ErrorScreen(modifier: Modifier = Modifier) {
+fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = ""
-        )
-        Text(text = stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
+        Text(stringResource(R.string.loading_failed))
+        Button(onClick = retryAction) {
+            Text(stringResource(R.string.retry))
+        }
     }
 }
 

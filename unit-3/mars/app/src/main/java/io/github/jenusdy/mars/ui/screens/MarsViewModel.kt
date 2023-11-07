@@ -30,7 +30,7 @@ class MarsViewModel(
         getMarsPhotos()
     }
 
-    private fun getMarsPhotos() {
+    fun getMarsPhotos() {
         viewModelScope.launch {
             marsUiState = MarsUiState.Loading
             marsUiState = try {
