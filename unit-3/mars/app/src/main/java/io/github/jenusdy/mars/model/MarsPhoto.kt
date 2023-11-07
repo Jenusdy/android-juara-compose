@@ -1,4 +1,4 @@
-package io.github.jenusdy.mars.network
+package io.github.jenusdy.mars.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

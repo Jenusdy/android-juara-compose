@@ -7,16 +7,13 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 
 interface AppContainer {
-    val marsPhotoRepository: MarsPhotoRepository
+    val marsPhotosRepository: MarsPhotosRepository
 }
 
 class DefaultAppContainer : AppContainer {
     private val baseUrl =
         "https://android-kotlin-fun-mars-server.appspot.com"
 
-    /**
-     * Use the Retrofit builder to build a retrofit object using a kotlinx.serialization converter
-     */
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
         .baseUrl(baseUrl)
@@ -26,7 +23,7 @@ class DefaultAppContainer : AppContainer {
         retrofit.create(MarsApiService::class.java)
     }
 
-    override val marsPhotoRepository: MarsPhotoRepository by lazy {
+    override val marsPhotosRepository: MarsPhotosRepository by lazy {
         NetworkMarsPhotosRepository(retrofitService)
     }
 
