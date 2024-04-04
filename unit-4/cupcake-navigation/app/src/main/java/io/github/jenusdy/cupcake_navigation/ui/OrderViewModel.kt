@@ -5,9 +5,17 @@ import io.github.jenusdy.cupcake_navigation.data.OrderUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+
+/** Price for a single cupcake */
+private const val PRICE_PER_CUPCAKE = 2.00
+
+/** Additional cost for same day pickup of an order */
+private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
 
 class OrderViewModel : ViewModel() {
 
@@ -25,4 +33,32 @@ class OrderViewModel : ViewModel() {
         }
         return dateOptions
     }
+
+    fun setFlavor(desiredFlavor: String) {
+        _uiState.update {
+            it.copy(flavor = desiredFlavor)
+        }
+    }
+
+    fun setDate(pickupDate: String) {
+        _uiState.update {
+            it.copy(
+                date = pickupDate,
+                price = calculatorPrice(pickupDate = pickupDate)
+            )
+        }
+    }
+
+    private fun calculatorPrice(
+        quantity: Int = _uiState.value.quantity,
+        pickupDate: String = _uiState.value.date
+    ): String {
+        var calculatePrice = quantity * PRICE_PER_CUPCAKE
+
+        if (pickUpOptions()[0] == pickupDate) {
+            calculatePrice += PRICE_FOR_SAME_DAY_PICKUP
+        }
+        return NumberFormat.getCurrencyInstance().format(calculatePrice)
+    }
+
 }
