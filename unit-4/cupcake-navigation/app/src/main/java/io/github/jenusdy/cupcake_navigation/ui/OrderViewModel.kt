@@ -19,20 +19,9 @@ private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
 
 class OrderViewModel : ViewModel() {
 
-    private val _uiState = MutableStateFlow(OrderUiState(pickupOptions = pickUpOptions()))
+    private val _uiState = MutableStateFlow(OrderUiState(pickupOptions = pickupOptions()))
     val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
 
-    private fun pickUpOptions(): List<String> {
-        val dateOptions = mutableListOf<String>()
-        val formatter = SimpleDateFormat("E MMM d", Locale.getDefault())
-        val calendar = Calendar.getInstance()
-
-        repeat(4) {
-            dateOptions.add(formatter.format(calendar.time))
-            calendar.add(Calendar.DATE, 1)
-        }
-        return dateOptions
-    }
 
     fun setQuantity(numberCupcakes: Int) {
         _uiState.update { currentState ->
@@ -58,16 +47,32 @@ class OrderViewModel : ViewModel() {
         }
     }
 
+    fun resetOrder() {
+        _uiState.value = OrderUiState(pickupOptions = pickupOptions())
+    }
+
     private fun calculatePrice(
         quantity: Int = _uiState.value.quantity,
         pickupDate: String = _uiState.value.date
     ): String {
         var calculatePrice = quantity * PRICE_PER_CUPCAKE
 
-        if (pickUpOptions()[0] == pickupDate) {
+        if (pickupOptions()[0] == pickupDate) {
             calculatePrice += PRICE_FOR_SAME_DAY_PICKUP
         }
         return NumberFormat.getCurrencyInstance().format(calculatePrice)
+    }
+
+    private fun pickupOptions(): List<String> {
+        val dateOptions = mutableListOf<String>()
+        val formatter = SimpleDateFormat("E MMM d", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+        // add current date and the following 3 dates.
+        repeat(4) {
+            dateOptions.add(formatter.format(calendar.time))
+            calendar.add(Calendar.DATE, 1)
+        }
+        return dateOptions
     }
 
 }
