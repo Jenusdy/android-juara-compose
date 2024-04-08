@@ -34,6 +34,15 @@ class OrderViewModel : ViewModel() {
         return dateOptions
     }
 
+    fun setQuantity(numberCupcakes: Int) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                quantity = numberCupcakes,
+                price = calculatePrice(quantity = numberCupcakes)
+            )
+        }
+    }
+
     fun setFlavor(desiredFlavor: String) {
         _uiState.update {
             it.copy(flavor = desiredFlavor)
@@ -44,12 +53,12 @@ class OrderViewModel : ViewModel() {
         _uiState.update {
             it.copy(
                 date = pickupDate,
-                price = calculatorPrice(pickupDate = pickupDate)
+                price = calculatePrice(pickupDate = pickupDate)
             )
         }
     }
 
-    private fun calculatorPrice(
+    private fun calculatePrice(
         quantity: Int = _uiState.value.quantity,
         pickupDate: String = _uiState.value.date
     ): String {

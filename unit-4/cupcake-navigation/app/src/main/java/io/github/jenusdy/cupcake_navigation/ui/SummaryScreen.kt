@@ -28,14 +28,14 @@ import io.github.jenusdy.cupcake_navigation.ui.theme.CupcakenavigationTheme
 @Composable
 fun OrderSummaryScreen(
     orderUiState: OrderUiState,
+    onCancelButtonClicked: () -> Unit,
+    onSendButtonClicked: (String, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val resources = LocalContext.current.resources
 
     val numberOfCupcakes = resources.getQuantityString(
-        R.plurals.cupcakes,
-        orderUiState.quantity,
-        orderUiState.quantity
+        R.plurals.cupcakes, orderUiState.quantity, orderUiState.quantity
     )
     //Load and format a string resource with the parameters.
     val orderSummary = stringResource(
@@ -57,8 +57,7 @@ fun OrderSummaryScreen(
     )
 
     Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween
+        modifier = modifier, verticalArrangement = Arrangement.SpaceBetween
     ) {
         Column(
             modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium)),
@@ -71,8 +70,7 @@ fun OrderSummaryScreen(
             }
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
             FormattedPriceLabel(
-                subtotal = orderUiState.price,
-                modifier = Modifier.align(Alignment.End)
+                subtotal = orderUiState.price, modifier = Modifier.align(Alignment.End)
             )
         }
         Row(
@@ -83,13 +81,13 @@ fun OrderSummaryScreen(
             ) {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = {}
+                    onClick = { onSendButtonClicked(newOrder, orderSummary) }
                 ) {
                     Text(stringResource(R.string.send))
                 }
                 OutlinedButton(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = {}
+                    onClick = onCancelButtonClicked
                 ) {
                     Text(stringResource(R.string.cancel))
                 }
@@ -98,13 +96,16 @@ fun OrderSummaryScreen(
     }
 }
 
-@Preview(showSystemUi = true,
-    showBackground = true)
+@Preview(
+    showSystemUi = true, showBackground = true
+)
 @Composable
 fun OrderSummaryPreview() {
     CupcakenavigationTheme {
         OrderSummaryScreen(
             orderUiState = OrderUiState(0, "Test", "Test", "$300.00"),
+            onCancelButtonClicked = {},
+            onSendButtonClicked = { _: String, _: String -> },
             modifier = Modifier.fillMaxHeight()
         )
     }
