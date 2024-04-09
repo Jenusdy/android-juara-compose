@@ -178,7 +178,7 @@ fun LunchTrayApp(
                 CheckoutScreen(
                     orderUiState = uiState,
                     onNextButtonClicked = {
-                        ancelOrderAndNavigateToStart(viewModel, navController)
+                        cancelOrderAndNavigateToStart(viewModel, navController)
                     },
                     onCancelButtonClicked = {
                         cancelOrderAndNavigateToStart(viewModel, navController)
