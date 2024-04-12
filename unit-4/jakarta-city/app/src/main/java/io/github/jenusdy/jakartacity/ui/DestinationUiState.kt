@@ -5,7 +5,9 @@ import io.github.jenusdy.jakartacity.data.local.DataSource
 import io.github.jenusdy.jakartacity.data.local.Destination
 
 data class DestinationUiState (
-    val destinationType: Map<DestinationType, List<Destination>> = emptyMap(),
+    val destinations: Map<DestinationType, List<Destination>> = emptyMap(),
     val currentDestination: DestinationType = DestinationType.Travel,
     val isShowingHomepage: Boolean = true
-)
+) {
+    val currentDestinations: List<Destination> by lazy { destinations[currentDestination]!! }
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="destination_list_item_inner_padding">20dp</dimen>
+    <dimen name="destination_list_item_vertical_spacing">8dp</dimen>
+    <dimen name="destination_list_item_header_subject_spacing">12dp</dimen>
+    <dimen name="destination_list_item_subject_body_spacing">8dp</dimen>
+
+    <dimen name="destination_header_profile_size">40dp</dimen>
+    <dimen name="destination_header_content_padding_horizontal">12dp</dimen>
+    <dimen name="destination_header_content_padding_vertical">4dp</dimen>
+
+    <dimen name="destination_list_only_horizontal_padding">16dp</dimen>
+</resources>
