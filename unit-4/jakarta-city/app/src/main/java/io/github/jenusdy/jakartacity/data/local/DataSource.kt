@@ -1,6 +1,7 @@
 package io.github.jenusdy.jakartacity.data.local
 
 import io.github.jenusdy.jakartacity.R
+import io.github.jenusdy.jakartacity.data.DestinationType
 
 object DataSource {
     val destinationList = listOf(
@@ -9,6 +10,7 @@ object DataSource {
             title = R.string.destination_1,
             description = R.string.destination_1_description,
             rating = 4.8,
+            type = DestinationType.Travel,
             image = R.drawable.monas
         ),
         Destination(
@@ -16,6 +18,7 @@ object DataSource {
             title = R.string.destination_2,
             description = R.string.destination_2_description,
             rating = 4.9,
+            type = DestinationType.Travel,
             image = R.drawable.kota_tua
         ),
         Destination(
@@ -23,6 +26,7 @@ object DataSource {
             title = R.string.destination_3,
             description = R.string.destination_3_description,
             rating = 4.9,
+            type = DestinationType.Travel,
             image = R.drawable.ancol
         ),
         Destination(
@@ -30,6 +34,7 @@ object DataSource {
             title = R.string.destination_4,
             description = R.string.destination_4_description,
             rating = 4.9,
+            type = DestinationType.Travel,
             image = R.drawable.galeri_indonesia
         ),
         Destination(
@@ -37,6 +42,7 @@ object DataSource {
             title = R.string.destination_5,
             description = R.string.destination_5_description,
             rating = 4.9,
+            type = DestinationType.Restaurant,
             image = R.drawable.taman_simanjuntak
         ),
         Destination(
@@ -44,6 +50,7 @@ object DataSource {
             title = R.string.destination_6,
             description = R.string.destination_6_description,
             rating = 4.9,
+            type = DestinationType.Restaurant,
             image = R.drawable.taman_simanjuntak
         ),
         Destination(
@@ -51,6 +58,7 @@ object DataSource {
             title = R.string.destination_7,
             description = R.string.destination_7_description,
             rating = 4.9,
+            type = DestinationType.Restaurant,
             image = R.drawable.taman_simanjuntak
         ),
         Destination(
@@ -58,6 +66,7 @@ object DataSource {
             title = R.string.destination_8,
             description = R.string.destination_8_description,
             rating = 4.9,
+            type = DestinationType.Restaurant,
             image = R.drawable.taman_simanjuntak
         ),
         Destination(
@@ -65,6 +74,7 @@ object DataSource {
             title = R.string.destination_9,
             description = R.string.destination_9_description,
             rating = 4.9,
+            type = DestinationType.Library,
             image = R.drawable.perpustakaan_nasional
         ),
         Destination(
@@ -72,6 +82,7 @@ object DataSource {
             title = R.string.destination_10,
             description = R.string.destination_10_description,
             rating = 4.9,
+            type = DestinationType.Library,
             image = R.drawable.perpustakaan_ismail_marzuki
         ),
         Destination(
@@ -79,6 +90,7 @@ object DataSource {
             title = R.string.destination_11,
             description = R.string.destination_11_description,
             rating = 4.9,
+            type = DestinationType.Library,
             image = R.drawable.perpustakaan_bps
         ),
         Destination(
@@ -86,6 +98,7 @@ object DataSource {
             title = R.string.destination_12,
             description = R.string.destination_12_description,
             rating = 4.9,
+            type = DestinationType.Library,
             image = R.drawable.perpustakaan_bps
         ),
         Destination(
@@ -93,6 +106,7 @@ object DataSource {
             title = R.string.destination_13,
             description = R.string.destination_13_description,
             rating = 4.9,
+            type = DestinationType.Park,
             image = R.drawable.taman_simanjuntak
         ),
         Destination(
@@ -100,6 +114,7 @@ object DataSource {
             title = R.string.destination_14,
             description = R.string.destination_14_description,
             rating = 4.9,
+            type = DestinationType.Park,
             image = R.drawable.taman_tebet
         ),
         Destination(
@@ -107,6 +122,7 @@ object DataSource {
             title = R.string.destination_15,
             description = R.string.destination_15_description,
             rating = 4.9,
+            type = DestinationType.Park,
             image = R.drawable.taman_sunter
         ),
         Destination(
@@ -114,8 +130,16 @@ object DataSource {
             title = R.string.destination_16,
             description = R.string.destination_16_description,
             rating = 4.9,
+            type = DestinationType.Park,
             image = R.drawable.taman_velodrome
         ),
+    )
 
+    val defaultDestination = Destination(
+        id = -1,
+        title = -1,
+        description = -1,
+        rating = 0.0,
+        image = -1
     )
 }

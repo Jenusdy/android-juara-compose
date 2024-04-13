@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -30,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -75,20 +77,23 @@ fun JakartaCityApp(
         Row(modifier = modifier) {
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxHeight()
                     .background(MaterialTheme.colorScheme.inverseOnSurface)
             ) {
                 DestinationContent(
                     uiState = destinationUiState,
                     onDestinationCardPressed = {},
-                    modifier = modifier
+                    modifier = Modifier.weight(1f)
                 )
                 BottomNavigationBar(
                     currentTab = destinationUiState.currentDestination,
                     onTabPressed = {
-                        viewModel.updateCurrentDestination(destination = it)
+                        viewModel.updateCurrentDestination(destinationType = it)
+                        viewModel.resetHomeScreenStates()
                     },
-                    navigationItemContentList = navigationItemContentList
+                    navigationItemContentList = navigationItemContentList,
+                    modifier = Modifier
+                        .fillMaxWidth()
                 )
             }
         }
@@ -112,6 +117,7 @@ private fun DestinationContent(
                 onCardClick = {
                     onDestinationCardPressed(destination)
                 },
+                modifier = modifier,
             )
         }
     }
